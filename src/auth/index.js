@@ -35,3 +35,44 @@ export const singIn = (user) =>{
         return err;
     })
 }
+
+//Save jwt to user loacl storage
+export const authenticate = (data, next)=>{
+    if(typeof window !== undefined){
+        localStorage.setItem("jwt", JSON.stringify(data));
+        next();
+    }
+}
+
+//Authenticate check
+export const isAuthenticate = ()=>{
+    if(typeof window == undefined){
+        return false;
+    }
+
+    if(localStorage.getItem("jwt")){
+        return JSON.parse(localStorage.getItem("jwt"))
+    }else{
+        return false;
+    }
+}
+
+//Sign Out
+export const signOut = (next)=>{
+    if(typeof window !== undefined){
+        localStorage.removeItem("jwt");
+        next();
+
+        return fetch(`${API}/signout`, {
+            method: "GET",
+        })
+        .then((res)=>{
+            return res.json();
+        })
+        .catch((err)=>{
+            return err;
+        })
+    }
+
+    
+}

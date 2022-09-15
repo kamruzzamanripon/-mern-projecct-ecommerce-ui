@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { singIn, singUp } from '../auth';
+import { useNavigate } from 'react-router-dom';
+import { authenticate, isAuthenticate, singIn } from '../auth';
+import Layout from '../core/Layout/Layout';
 
 const Signin = (props)=> {
     const { register, handleSubmit, setValue, formState:{errors}} = useForm();
     let [error, setError] = useState(0);
-    let [success, setSuccess] = useState(0)
+    let [success, setSuccess] = useState(0);
+    let [redirect, setRedirect] = useState(false);
+
+    const {user} = isAuthenticate();
+    const navigate = useNavigate()
 
     let onSubmit =(data)=>{
         console.log(data)
@@ -16,10 +22,13 @@ const Signin = (props)=> {
                 setSuccess(0);
                 setError(data.error);
             }else{
-                setSuccess(1);
-                setError(0);
-                setValue("email", "", {shouldValidate: false});
-                setValue("password", "", {shouldValidate: false});
+                authenticate(data, ()=>{
+                    setRedirect(true)
+                    setSuccess(1);
+                    setError(0);
+                    setValue("email", "", {shouldValidate: false});
+                    setValue("password", "", {shouldValidate: false});
+                })
             }
         })
     }
@@ -79,12 +88,27 @@ const Signin = (props)=> {
             </div>
         )
     }
+
+    //redirect
+    const redirectHome = ()=>{
+        if(isAuthenticate()){
+            //return <Redirect to="/" />
+            navigate("/");
+        }
+
+        if(redirect){
+            if(user && user.role === 1){
+
+            }
+        }
+    }
     return (
-        <div>
+        <Layout description="This is Sign In Page" title="Sign In">
+            {redirectHome()}
             {showError()}
             {showSuccess()}
             {signUpForm()}
-        </div>
+        </Layout>
     );
 }
 

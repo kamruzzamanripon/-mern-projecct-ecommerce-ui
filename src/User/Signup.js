@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { singUp } from '../auth';
+import Layout from '../core/Layout/Layout';
 
 const Signup = (props)=> {
     const { register, handleSubmit, setValue, formState:{errors}} = useForm();
@@ -98,16 +100,16 @@ const Signup = (props)=> {
     const showSuccess = ()=>{
         return(
             <div className="alert alert-info" style={{ display: success ? "" : "none" }}>
-                Account Created Successfully! Please Sign In
+                Account Created Successfully! Please <Link to="/signin">Sign In</Link>
             </div>
         )
     }
     return (
-        <div>
+        <Layout description="This is Sign Up Page" title="Sign Up">
             {showError()}
             {showSuccess()}
             {signUpForm()}
-        </div>
+        </Layout>
     );
 }
 

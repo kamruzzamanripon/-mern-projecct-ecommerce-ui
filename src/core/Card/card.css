@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Benne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+p{
+    font-family: "Benne", serif;
+    font-size: 18px;
+}
+
+.singleProduct img{
+    height: 400px;
+    width: 100%;
+}
+
+.product-img img{
+    width: 100%;
+    height: 250px;
+}
+
+.cat-name{
+    background-color: #364f6b;
+    color: white;
+    font-weight: bold;
+}
+
+.p_name{
+    font-size: 18px;
+    color: #492540;
+    text-align: center;
+    font-weight: 600;
+    font-family: "Open Sans", sans-serif;
+}
+
+.price{
+    font-size: 22px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: auto;
+}
+
+.btn-outline-warning{
+    color: #cb3b3b;
+    border-color: #cb3b3b;
+}
+
+.btn-outline-warning:hover{
+    color: white;
+    background-color: #cb3b3b;
+}

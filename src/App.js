@@ -1,11 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import Signin from './User/Signin';
+import RouterAll from './Routes';
 
 function App() {
   return (
     // <Signup />
-    <Signin />
+    <RouterAll />
   );
 }
 
