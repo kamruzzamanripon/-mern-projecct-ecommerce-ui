@@ -1,5 +1,9 @@
+import { faCartPlus, faEye } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import ShowImage from '../ShowImage/ShowImage';
 
 //css
 //import './card.css'
@@ -18,6 +22,13 @@ const Card = ({
         <div className='card'>
             <div className="card-header cat-name">{product.category && product.category.name}</div>
             <div className="card-body">
+
+                { product.quantity > 0 ? 
+                (<span className='badge badge-success badge-pill float-right'> {product.quantity}</span>) : 
+                (<span className='badge badge-danger badge-pill float-right'> Out of Stock</span>)}
+                <br />
+                <ShowImage cssClassName={cssClassName} url="product" item={product} />
+                    
                 <p className='p_name'>{product.name}</p>
                 <p className='price'> &#2547; {product.price} </p>
 
@@ -28,16 +39,18 @@ const Card = ({
 
                 {showAddToCartButton && (
                     <button className='btn btn-outline-warning mt-2 mb-2 ml-2 mr-2'>
-                        Add to Cart
+                        Add to Cart <FontAwesomeIcon icon={faCartPlus} />
                     </button>
                 )}
 
                 
+                <Link to={`/product/${product._id}`}>
                 {viewProductButton && (
                     <button className='btn btn-outline-info mt-2 mb-2 ml-2 mr-2'>
-                        Add to Cart
+                       View Product <FontAwesomeIcon icon={faEye} />
                     </button>
                 )}
+                </Link>
                
             </div>
         </div>

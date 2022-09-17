@@ -12,3 +12,34 @@ export const getProducts = (sortBy)=>{
         console.log(err);
     })
 }
+
+//Get Single Product
+export const getSingleProduct = (productId)=>{
+    return fetch(`${API}/product/${productId}`, {
+        method:"GET"
+    })
+    .then((data)=>{
+        //console.log('fecth', data)
+        return data.json()
+
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+}
+
+//Get Related Products
+export const getRelatedProducts = (productId)=>{
+    return fetch(`${API}/products/related/${productId}`, {
+        method:"GET"
+    })
+    .then((data)=>{
+        //console.log('fecth', data)
+        return data.json()
+
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
+}
+
