@@ -1,8 +1,9 @@
 import { faCartPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { addItem } from '../cartHelpers';
 import ShowImage from '../ShowImage/ShowImage';
 
 //css
@@ -18,6 +19,14 @@ const Card = ({
     run= undefined,
     cssClassName = ''
 })=> {
+    const [redirect, setRedirect] = useState()
+
+    const addToCart =()=>{
+        addItem(product, ()=>{
+            setRedirect(true)
+        })
+    }
+
     return (
         <div className='card'>
             <div className="card-header cat-name">{product.category && product.category.name}</div>
@@ -38,7 +47,7 @@ const Card = ({
                 </p>
 
                 {showAddToCartButton && (
-                    <button className='btn btn-outline-warning mt-2 mb-2 ml-2 mr-2'>
+                    <button className='btn btn-outline-warning mt-2 mb-2 ml-2 mr-2' onClick={addToCart}>
                         Add to Cart <FontAwesomeIcon icon={faCartPlus} />
                     </button>
                 )}

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { isAuthenticate } from '../../auth';
 import { getProducts } from '../apiCore';
 import Card from '../Card/Card';
 import Layout from '../Layout/Layout';
+import Search from '../Search/Search';
 
 const Home = ()=> {
     const [productBySell, setProductBySell] = useState([]);
@@ -43,6 +43,15 @@ const Home = ()=> {
     },[])
     return (
         <Layout title="Welcome to Click to Cart" description="this is Home Page" className="container-fluid">
+
+            <Container>
+                <Row>
+                    <Col md={12}>
+                        <Search />
+                    </Col>
+                </Row>
+            </Container>
+
             <Container>
                 <h1>Best Seller</h1>
                 <Row>
