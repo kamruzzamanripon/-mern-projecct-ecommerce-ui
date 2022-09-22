@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AddCategory from "./admin/AddCategory";
 import AddProduct from "./admin/AddProduct";
 import ManageProduct from "./admin/ManageProduct";
+import Order from "./admin/Order";
 import UpdateProduct from "./admin/UpdateProduct";
 import AdminPrivateRoute from "./auth/AdminRoute";
 import PrivateRoute from "./auth/PrivateRoute";
@@ -13,6 +14,7 @@ import Shop from "./core/Shop/Shop";
 
 //components
 import AdminDashboard from "./User/AdminDashboard";
+import Profile from "./User/Profile";
 import Signin from "./User/Signin";
 import Signup from "./User/Signup";
 import UserDashboard from "./User/UserDashboard";
@@ -31,6 +33,7 @@ const RouterAll = () => {
         {/* Private Route */}
         <Route path="/user/*"  element={<PrivateRoute/>}>
           <Route path="dashboard"  element={<UserDashboard />} />
+          <Route path="profile/:userId"  element={<Profile />} />
         </Route>
         {/* End Private Route */}
         
@@ -41,6 +44,7 @@ const RouterAll = () => {
           <Route path="create/product"  element={<AddProduct />} />
           <Route path="products"  element={<ManageProduct />} />
           <Route path="product/update/:productId"  element={<UpdateProduct />} />
+          <Route path="orders"  element={<Order />} />
         </Route>
         {/* End Admin Private Route */}
 

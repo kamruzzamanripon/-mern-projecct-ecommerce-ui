@@ -1,7 +1,12 @@
 import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { isAuthenticate } from '../auth';
 import Layout from '../core/Layout/Layout';
+
+ //get user info
+ const {user:{_id, name, email, role}} = isAuthenticate()
+ const {token} = isAuthenticate()
 
 const adminLinks = ()=>{
     return(
@@ -25,9 +30,24 @@ const adminLinks = ()=>{
     )
 }
 
+
+//User adminInfo
 const adminInfo = ()=>{
-    return(
-        <div>User info goes here</div>
+    return (
+        <div className="card dashBoardCard mb-5 mt-5">
+            <h3 className="card-header">User Information</h3>
+            <ul className="list-group">
+                <li className="list-group-item">
+                    <strong>Name:</strong> {name}
+                </li>
+                <li className="list-group-item">
+                    <strong>Email:</strong> {email}
+                </li>
+                <li className="list-group-item">
+                    <strong>User Type:</strong> {role == 1 ? "Admin" : "Registered User"}
+                </li>
+            </ul>
+        </div>
     )
 }
 

@@ -122,3 +122,61 @@ export const updateProduct = (productId, userId, token, product) =>{
         return err;
     })
 }
+
+//get Order List
+export const getOrderList = (userId, token) =>{
+    //console.log("aixos", userId, token, category)
+    return fetch(`${API}/order/list/${userId}`, {
+        method: "GET",
+        headers:{
+            Accept:"application/json",
+            Authorization:`Bearer ${token}`
+        }
+    })
+    .then((res)=>{
+        return res.json();
+    })
+    .catch((err)=>{
+        return err;
+    })
+}
+
+
+//Update Order Status
+export const updateOrderStatus = (userId, token, orderId, status) =>{
+    //console.log("aixos", userId, token, category)
+    return fetch(`${API}/order/${orderId}/${userId}`, {
+        method: "PUT",
+        headers:{
+            Accept:"application/json",
+            "Content-Type": "application/json",
+            Authorization:`Bearer ${token}`
+        },
+        body: JSON.stringify({ status:status, orderId:orderId}),
+    })
+    .then((res)=>{
+        return res.json();
+    })
+    .catch((err)=>{
+        return err;
+    })
+}
+
+
+//get Status
+export const getStatusValues = (userId, token) =>{
+    //console.log("aixos", userId, token, category)
+    return fetch(`${API}/order/status-values/${userId}`, {
+        method: "GET",
+        headers:{
+            Accept:"application/json",
+            Authorization:`Bearer ${token}`
+        }
+    })
+    .then((res)=>{
+        return res.json();
+    })
+    .catch((err)=>{
+        return err;
+    })
+}

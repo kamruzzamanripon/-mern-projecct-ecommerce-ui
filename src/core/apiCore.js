@@ -98,3 +98,64 @@ export const getFilterProduct = (skip, limit, filters={})=>{
 }
 
 
+//Generate Braintree Token
+export const getBraintreeClientToken = (userId, token) =>{
+    return fetch(`${API}/braintree/gettoken/${userId}`, {
+        method: "GET",
+        headers:{
+            Accept:"application/json",
+            "Content-Type" : "application/json",
+            Authorization: `Bearer ${token}`
+        },
+       
+    })
+    .then((data)=>{
+        return data.json();
+    })
+    .catch((err)=>{
+        return err.json();;
+    })
+}
+
+
+//Payment Process Braintree Token
+export const processPayment = (userId, token, paymentData) =>{
+    return fetch(`${API}/braintree/payment/${userId}`, {
+        method: "GET",
+        headers:{
+            Accept:"application/json",
+            "Content-Type" : "application/json",
+            Authorization: `Bearer ${token}`
+        },
+       body: JSON.stringify(paymentData)
+    })
+    .then((data)=>{
+        return data.json();
+    })
+    .catch((err)=>{
+        return err.json();;
+    })
+}
+
+
+//Create an Order
+export const createOrder = (userId, token, createOrderData) =>{
+    return fetch(`${API}/order/create/${userId}`, {
+        method: "POST",
+        headers:{
+            Accept:"application/json",
+            "Content-Type" : "application/json",
+            Authorization: `Bearer ${token}`
+        },
+       body: JSON.stringify({ order: createOrderData})
+    })
+    .then((data)=>{
+        return data.json();
+    })
+    .catch((err)=>{
+        return err.json();;
+    })
+}
+
+
+

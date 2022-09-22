@@ -3,10 +3,12 @@ import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CartCard from '../CartCard/CartCard';
 import { getCart } from '../cartHelpers';
+import Checkout from '../Checkout/Checkout';
 import Layout from '../Layout/Layout';
 
 const Cart = () => {
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState([]);
+    const [run, setRun] = useState(false);
 
     //get Total
     const getTotal = ()=>{
@@ -23,7 +25,14 @@ const Cart = () => {
                 <hr />
                 {
                     items.map((product, i)=>(
-                        <CartCard key={i} product={product} />
+                        <CartCard 
+                            key={i} 
+                            product={product} 
+                            showRemoveProductButton={true} 
+                            setRun={setRun}
+                            run={run} 
+                            cartUpdate={true}
+                        />
                     ))
                 }
             </div>
@@ -42,7 +51,7 @@ const Cart = () => {
 
     useEffect(()=>{
         setItems(getCart())
-    },[])
+    },[run])
     return (
         <Layout title="cart" description='Manage your cart' className="container-fluid">
             <Container>
@@ -52,6 +61,11 @@ const Cart = () => {
                     </div>
                     <div className="col-6">
                         <h2>Select your Payment Method</h2>
+                        <Checkout 
+                            products={items}
+                            setRun={setRun}
+                            run={run}
+                        />
                     </div>
                 </Row>
             </Container>

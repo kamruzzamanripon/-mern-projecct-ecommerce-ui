@@ -2,7 +2,7 @@ import { faCartPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { addItem } from '../cartHelpers';
 import ShowImage from '../ShowImage/ShowImage';
 
@@ -20,6 +20,13 @@ const Card = ({
     cssClassName = ''
 })=> {
     const [redirect, setRedirect] = useState()
+    const navigate = useNavigate()
+
+    const shouldRedirect = (redirect) =>{
+        if(redirect){
+            navigate("/cart");
+        }
+    }
 
     const addToCart =()=>{
         addItem(product, ()=>{
@@ -29,6 +36,7 @@ const Card = ({
 
     return (
         <div className='card'>
+            {shouldRedirect(redirect)}
             <div className="card-header cat-name">{product.category && product.category.name}</div>
             <div className="card-body">
 
